@@ -1,0 +1,6 @@
+{
+  "name": "그레이트홀 관리국 아카이브",
+  "description": "그레이트홀 재난 이후 각성한 마법사들과 마력석 장비로 대항하는 마술사들, 그리고 관리국의 상세 기록 아카이브입니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
