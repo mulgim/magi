@@ -237,7 +237,7 @@ const CHARACTERS: Character[] = [
     personality: ["소심", "이중인격", "광기"],
     speech: ["소심하고 주눅든 말투", "인격 변하면 광기에 찬 말투"],
     features: ["주무기는 맨손무투파", "소심한 인격과 흉포한 인격 공존"],
-    imageUrl: "https://mul3.uk/mg/m/1.webp"
+    imageUrl: "https://mul3.uk/mg/n/1.webp"
   },
   {
     id: "ethan",
