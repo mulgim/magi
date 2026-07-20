@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { 
   Compass, 
   Users, 
@@ -371,12 +370,7 @@ export default function App() {
         
         {/* SECTION 0: INTRO HERO */}
         <section id="intro" className="min-h-[calc(100vh-80px)] flex flex-col justify-center py-12 md:py-20 border-b border-blue-950/30">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6 animate-fade-in-up">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/30 border border-blue-900/40 text-blue-400 text-xs font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
               보안 등급 2급 // 기밀 해제 아카이브
@@ -408,7 +402,7 @@ export default function App() {
                 소속 인물 도감
               </a>
             </div>
-          </motion.div>
+          </div>
 
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl pt-8 border-t border-blue-950/40">
             <div className="p-4 rounded-lg bg-zinc-950/40 border border-blue-950/40">
@@ -639,24 +633,18 @@ export default function App() {
 
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <AnimatePresence mode="popLayout">
-              {filteredCharacters.map((char) => {
-                const isSelected = selectedCharacter?.id === char.id;
-                return (
-                  <motion.div
-                    key={char.id}
-                    layoutId={`card-${char.id}`}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
-                    onClick={() => setSelectedCharacter(char)}
-                    className={`rounded-xl cursor-pointer transition-all duration-300 relative overflow-hidden group border flex flex-col ${
-                      isSelected 
-                        ? 'bg-zinc-950 border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.2)]' 
-                        : 'bg-zinc-950/90 border-blue-950 hover:border-blue-900/60'
-                    }`}
-                  >
+            {filteredCharacters.map((char) => {
+              const isSelected = selectedCharacter?.id === char.id;
+              return (
+                <div
+                  key={char.id}
+                  onClick={() => setSelectedCharacter(char)}
+                  className={`rounded-xl cursor-pointer transition-all duration-300 relative overflow-hidden group border flex flex-col hover:-translate-y-1 hover:border-blue-700/50 ${
+                    isSelected 
+                      ? 'bg-zinc-950 border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.2)]' 
+                      : 'bg-zinc-950/90 border-blue-950 hover:border-blue-900/60'
+                  }`}
+                >
                     {/* Character Dossier Portrait */}
                     <div className="relative h-44 w-full bg-zinc-950 overflow-hidden border-b border-blue-950/60">
                       {/* Scanline pattern, noise, and crosshairs */}
@@ -741,22 +729,17 @@ export default function App() {
                         </span>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
-            </AnimatePresence>
           </div>
 
           {/* Details Modal */}
-          <AnimatePresence>
-            {selectedCharacter && (
-              <div className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="bg-zinc-950 border border-blue-900 rounded-xl max-w-2xl w-full p-6 shadow-[0_0_30px_rgba(30,58,138,0.3)] relative"
-                >
+          {selectedCharacter && (
+            <div className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 z-50 transition-opacity duration-300">
+              <div
+                className="bg-zinc-950 border border-blue-900 rounded-xl max-w-2xl w-full p-6 shadow-[0_0_30px_rgba(30,58,138,0.3)] relative animate-scale-in"
+              >
                   <button 
                     onClick={() => setSelectedCharacter(null)}
                     className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-100 font-mono text-lg p-1 z-10"
@@ -859,10 +842,9 @@ export default function App() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
               </div>
-            )}
-          </AnimatePresence>
+            </div>
+          )}
         </section>
       </main>
 
